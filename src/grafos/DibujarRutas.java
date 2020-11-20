@@ -23,17 +23,21 @@ public class DibujarRutas {
       {
          for (Arista a:v.getAristas())
          {
-            ((Graphics2D)g).setStroke(new BasicStroke(2));
-            ((Graphics2D)g).setColor(Color.GRAY);
+            ((Graphics2D)g).setStroke(new BasicStroke(3));
+            ((Graphics2D)g).setColor(Color.white);
             ((Graphics2D)g).drawLine(a.getOrigen().getX() + 5, a.getOrigen().getY() + 5, a.getDestino().getX() + 5, a.getDestino().getY() + 5);
          }
       }
       
       for(Vertice vertice:G.getListaVertices())
       {
-         ((Graphics2D)g).setColor(Color.white);
-//         ((Graphics2D)g).drawOval(vertice.getX(), vertice.getY(), 10, 10);
-         ((Graphics2D)g).fillOval(vertice.getX(), vertice.getY(), 10, 10);
+          if(vertice.getType().equals("ciudad")){
+              ((Graphics2D)g).setColor(Color.orange);
+              ((Graphics2D)g).fillOval(vertice.getX() - 2, vertice.getY() - 2, 15, 15);
+          } else if(vertice.getType().equals("pueblo")){
+            ((Graphics2D)g).setColor(Color.pink);
+              ((Graphics2D)g).fillOval(vertice.getX(), vertice.getY(), 10, 10);
+          }         
       }
    }
    
@@ -41,14 +45,14 @@ public class DibujarRutas {
    {
       for (Vertice V:G.getListaVertices())
       {
-         ((Graphics2D)g).setColor(Color.BLUE);
-         ((Graphics2D)g).drawOval(V.getX(), V.getY(), 10, 10);
-         ((Graphics2D)g).fillOval(V.getX(), V.getY(), 10, 10);
+         ((Graphics2D)g).setColor(Color.red);
+         ((Graphics2D)g).drawOval(V.getX() , V.getY() , 9, 9);
+         ((Graphics2D)g).fillOval(V.getX() , V.getY() , 9, 9);
          
          for (Arista A:V.getAristas())
          {
-            ((Graphics2D)g).setStroke(new BasicStroke(2));
-            ((Graphics2D)g).setColor(Color.BLUE);
+            ((Graphics2D)g).setStroke(new BasicStroke(3));
+            ((Graphics2D)g).setColor(Color.red);
             ((Graphics2D)g).drawLine(A.getOrigen().getX() + 5, A.getOrigen().getY() + 5, A.getDestino().getX() + 5, A.getDestino().getY() + 5);
          }
       }
@@ -56,7 +60,7 @@ public class DibujarRutas {
    
    public static void seleccionarVertice(Graphics g, Vertice v)
    {
-      ((Graphics2D)g).setColor(Color.RED);
+      ((Graphics2D)g).setColor(Color.red);
       ((Graphics2D)g).drawOval(v.getX(), v.getY(), 10, 10);
       ((Graphics2D)g).fillOval(v.getX(), v.getY(), 10, 10);
    }
