@@ -27,11 +27,13 @@ public class AlgoritmoDijkstra {
       Costos[G.getListaVertices().indexOf(VI)] = 0;
       Vertice VTemp = VI;
       
+      
       while(!(VTemp.getDato().equals(VF.getDato())))
       {
+         System.out.println("Pass for Here");
          double min = 999;
          
-         for (Arista A:VTemp.getAristas())
+         for (Arista A : VTemp.getAristas())
          {
             Destino = G.getListaVertices().indexOf(A.getDestino());
             Distancia = Acumulado + A.getPeso();
@@ -56,7 +58,7 @@ public class AlgoritmoDijkstra {
             }
          }
          
-         Vertice V = G.getListaVertices().get(Indice);
+         Vertice V = G.getListaVertices().get(Indice); //handle it by id
          Acumulado = min;
          VTemp = V;
       }
@@ -110,7 +112,7 @@ public class AlgoritmoDijkstra {
    
    private static void CambiarEstado(Grafo G)
    {
-      for (Vertice V:G.getListaVertices())
+      for (Vertice V : G.getListaVertices())
       {
          V.setEvaluado(false);
       }

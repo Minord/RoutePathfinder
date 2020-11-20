@@ -25,11 +25,15 @@ public class FramePrincipal extends javax.swing.JFrame {
       initComponents();
       jcbDepartamentoOrigen.setEnabled(false);
       jcbDepartamentoDestino.setEnabled(false);
-      Image img = new ImageIcon("src/Img/mapa-el-salvador.svg").getImage();
-      Image image = img.getScaledInstance(700, 400, Image.SCALE_SMOOTH);
+      Image img = new ImageIcon("src/Img/BaseMap.png").getImage();
+      Image image = img.getScaledInstance(jlbMapa.getWidth(), -1, Image.SCALE_SMOOTH);
       jlbMapa.setIcon(new ImageIcon(image));
       agregarVertices();
+      
+      grafo = new MapLoader().loadMapaGrafo();
       agregarItems();
+      
+      
       jcbDepartamentoOrigen.setSelectedIndex(-1);
       jcbDepartamentoDestino.setSelectedIndex(-1);
    }
@@ -165,8 +169,10 @@ public class FramePrincipal extends javax.swing.JFrame {
    {
       for (Vertice v:grafo.getListaVertices())
       {
-         jcbDepartamentoOrigen.addItem(v.getDato());
-         jcbDepartamentoDestino.addItem(v.getDato());
+         if (!v.getType().equals("intercepcion")){
+            jcbDepartamentoOrigen.addItem(v.getDato());
+            jcbDepartamentoDestino.addItem(v.getDato());
+         }
       }
    }
    
@@ -315,8 +321,8 @@ public class FramePrincipal extends javax.swing.JFrame {
                 .addComponent(jbtMostrarRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtCalcularRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -327,11 +333,15 @@ public class FramePrincipal extends javax.swing.JFrame {
         jpMapa.setLayout(jpMapaLayout);
         jpMapaLayout.setHorizontalGroup(
             jpMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbMapa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addGroup(jpMapaLayout.createSequentialGroup()
+                .addComponent(jlbMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 1006, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jpMapaLayout.setVerticalGroup(
             jpMapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbMapa, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(jpMapaLayout.createSequentialGroup()
+                .addComponent(jlbMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         Panel.setBackground(new java.awt.Color(51, 51, 51));
@@ -422,12 +432,12 @@ public class FramePrincipal extends javax.swing.JFrame {
       // TODO add your handling code here:
       if (jcbDepartamentoOrigen.getSelectedIndex() != -1 && jcbDepartamentoDestino.getSelectedIndex() != -1)
       {
-         Grafo Ruta = AlgoritmoDijkstra.obtenerRuta(grafo, verticeInicio, verticeFinal);
+         Grafo Ruta = AlgoritmoDijkstra2.obtenerRuta(grafo, verticeInicio, verticeFinal);
          double DistanciaTotal = 0;
          
-         for (Vertice V:Ruta.getListaVertices())
+         for (Vertice v : Ruta.getListaVertices())
          {
-            for (Arista A:V.getAristas())
+            for (Arista A : v.getAristas())
             {
                DistanciaTotal += A.getPeso();
             }
@@ -435,6 +445,8 @@ public class FramePrincipal extends javax.swing.JFrame {
          
          DibujarRutas.dibujarRutas(jpMapa.getGraphics(), grafo);
          DibujarRutas.dibujarRutaMinima(jpMapa.getGraphics(), Ruta);
+         
+         //Aqui se hace el reporte de los tiempos y distancias minimas.
          jtResultados.setText("Distancia Minima: " + String.format("%.2f", DistanciaTotal) + " Km");
       }
       else

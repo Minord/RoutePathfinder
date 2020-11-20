@@ -32,7 +32,7 @@ public class DibujarRutas {
       for(Vertice vertice:G.getListaVertices())
       {
          ((Graphics2D)g).setColor(Color.white);
-         ((Graphics2D)g).drawOval(vertice.getX(), vertice.getY(), 10, 10);
+//         ((Graphics2D)g).drawOval(vertice.getX(), vertice.getY(), 10, 10);
          ((Graphics2D)g).fillOval(vertice.getX(), vertice.getY(), 10, 10);
       }
    }

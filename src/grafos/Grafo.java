@@ -35,9 +35,18 @@ public class Grafo {
       Vertice vertice = null;
       
       for (Vertice vertices:listaVertices)
-         if (vertices.getDato().equals(dato))
+        if (vertices.getDato().equals(dato))
             vertice = vertices;
       
       return vertice;
+   }
+   
+   public Vertice buscarVerticeById(int id){
+       Vertice vertice = null;
+       
+       for(Vertice vertices : listaVertices)
+            if (vertices.getId() == id)
+                vertice = vertices;
+       return vertice;
    }
 }
