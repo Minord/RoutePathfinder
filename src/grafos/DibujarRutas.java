@@ -17,9 +17,19 @@ import java.util.List;
  */
 public class DibujarRutas {
 
-   public static void dibujarVertices(Graphics g, List<Vertice> listaVertices)
+   public static void dibujarRutas(Graphics g, Grafo G)
    {      
-      for(Vertice vertice:listaVertices)
+      for (Vertice v:G.getListaVertices())
+      {
+         for (Arista a:v.getAristas())
+         {
+            ((Graphics2D)g).setStroke(new BasicStroke(2));
+            ((Graphics2D)g).setColor(Color.GRAY);
+            ((Graphics2D)g).drawLine(a.getOrigen().getX() + 5, a.getOrigen().getY() + 5, a.getDestino().getX() + 5, a.getDestino().getY() + 5);
+         }
+      }
+      
+      for(Vertice vertice:G.getListaVertices())
       {
          ((Graphics2D)g).setColor(Color.white);
          ((Graphics2D)g).drawOval(vertice.getX(), vertice.getY(), 10, 10);
@@ -27,15 +37,19 @@ public class DibujarRutas {
       }
    }
    
-   public static void dibujarAristas(Graphics g, List<Vertice> listaVertices)
+   public static void dibujarRutaMinima(Graphics g, Grafo G)
    {
-      for (Vertice v:listaVertices)
+      for (Vertice V:G.getListaVertices())
       {
-         for (Arista a:v.getAristas())
+         ((Graphics2D)g).setColor(Color.BLUE);
+         ((Graphics2D)g).drawOval(V.getX(), V.getY(), 10, 10);
+         ((Graphics2D)g).fillOval(V.getX(), V.getY(), 10, 10);
+         
+         for (Arista A:V.getAristas())
          {
             ((Graphics2D)g).setStroke(new BasicStroke(2));
-            ((Graphics2D)g).setColor(Color.GRAY);
-            ((Graphics2D)g).drawLine(a.getOrigen().getX() + 5, a.getOrigen().getY() + 5, a.getDestino().getX() + 5, a.getDestino().getY() + 5);
+            ((Graphics2D)g).setColor(Color.BLUE);
+            ((Graphics2D)g).drawLine(A.getOrigen().getX() + 5, A.getOrigen().getY() + 5, A.getDestino().getX() + 5, A.getDestino().getY() + 5);
          }
       }
    }
