@@ -10,20 +10,12 @@ package grafos;
  * @author criss
  */
 public class Arista {
-   private Vertice origen;
-   private Vertice destino;
-   private double peso; //inesesario
+   private final Vertice origen;
+   private final Vertice destino;
    
    public Arista(Vertice origen, Vertice destino){
        this.origen = origen;
        this.destino = destino;
-   }
-   
-   public Arista(Vertice origen, Vertice destino, double peso)
-   {
-      this.origen = origen;
-      this.destino = destino;
-      this.peso = peso;
    }
    
    public Vertice getOrigen()
@@ -35,16 +27,11 @@ public class Arista {
    {
       return destino;
    }
-
-   public void setPeso(double peso) //Inesesario
-   {
-      this.peso = peso;
-   }
   
    public double getPeso()
    {
-      return  Math.sqrt(Math.pow(origen.getX() - destino.getX(), 2) 
-                      + Math.pow(origen.getY() - destino.getY(), 2));
+      return  Math.sqrt(Math.pow(origen.getXReal() - destino.getXReal(), 2) 
+                      + Math.pow(origen.getYReal() - destino.getYReal(), 2));
    }
    
    public int getSegundoVertice(int primerVerticeId){

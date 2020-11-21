@@ -6,6 +6,7 @@
 package grafos;
 
 import java.awt.Image;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -27,142 +28,13 @@ public class FramePrincipal extends javax.swing.JFrame {
       jcbDepartamentoDestino.setEnabled(false);
       Image img = new ImageIcon("src/Img/BaseMap.png").getImage();
       Image image = img.getScaledInstance(jlbMapa.getWidth(), -1, Image.SCALE_SMOOTH);
-      jlbMapa.setIcon(new ImageIcon(image));
-      agregarVertices();
+      jlbMapa.setIcon(new ImageIcon(image));   
       
       grafo = new MapLoader().loadMapaGrafo();
       agregarItems();
-      
-      
+
       jcbDepartamentoOrigen.setSelectedIndex(-1);
       jcbDepartamentoDestino.setSelectedIndex(-1);
-   }
-   
-   private void agregarVertices()
-   {
-      grafo.agregarVertice(new Vertice("Ahuachapán", 95, 185)); // indice 0
-      grafo.agregarVertice(new Vertice("Santa Ana", 185, 130)); // indice 1
-      grafo.agregarVertice(new Vertice("Sonsonate", 145, 220)); // indice 2
-      grafo.agregarVertice(new Vertice("Chalatenango", 305, 120)); // indice 3
-      grafo.agregarVertice(new Vertice("La Libertad", 235, 220)); // indice 4
-      grafo.agregarVertice(new Vertice("San Salvador", 280, 210)); // indice 5
-      grafo.agregarVertice(new Vertice("Cuscatlán", 320, 195)); // indice 6
-      grafo.agregarVertice(new Vertice("Cabañas", 400, 185)); // indice 7
-      grafo.agregarVertice(new Vertice("La Paz", 330, 270)); // indice 8
-      grafo.agregarVertice(new Vertice("San Vicente", 390, 250)); // indice 9
-      grafo.agregarVertice(new Vertice("Usulután", 445, 290)); // indice 10
-      grafo.agregarVertice(new Vertice("San Miguel", 520, 270)); // indice 11
-      grafo.agregarVertice(new Vertice("Morazán", 555, 205)); // indice 12
-      grafo.agregarVertice(new Vertice("La Unión", 600, 275)); // indice 13
-      agregarConexiones();
-   }
-   
-   private void agregarConexiones()
-   {
-      grafo.getListaVertices().get(0).agregarArista(
-              new Arista(grafo.getListaVertices().get(0), grafo.getListaVertices().get(1), 41.06)); //Ahuachapán - Santa Ana
-      grafo.getListaVertices().get(0).agregarArista(
-              new Arista(grafo.getListaVertices().get(0), grafo.getListaVertices().get(2), 26.51)); //Ahuachapán - Sonsonate
-      grafo.getListaVertices().get(1).agregarArista(
-              new Arista(grafo.getListaVertices().get(1), grafo.getListaVertices().get(0), 41.06)); //Santa Ana - Ahuachapán
-      grafo.getListaVertices().get(1).agregarArista(
-              new Arista(grafo.getListaVertices().get(1), grafo.getListaVertices().get(2), 35.40)); //Santa Ana - Sonsonate
-      grafo.getListaVertices().get(1).agregarArista(
-              new Arista(grafo.getListaVertices().get(1), grafo.getListaVertices().get(3), 67.74)); //Santa Ana - Chalatenango
-      grafo.getListaVertices().get(1).agregarArista(
-              new Arista(grafo.getListaVertices().get(1), grafo.getListaVertices().get(4), 33.17)); //Santa Ana - La Libertad
-      grafo.getListaVertices().get(2).agregarArista(
-              new Arista(grafo.getListaVertices().get(2), grafo.getListaVertices().get(0), 26.51)); //Sonsonate - Ahuachapán
-      grafo.getListaVertices().get(2).agregarArista(
-              new Arista(grafo.getListaVertices().get(2), grafo.getListaVertices().get(1), 35.40)); //Sonsonate - Santa Ana
-      grafo.getListaVertices().get(2).agregarArista(
-              new Arista(grafo.getListaVertices().get(2), grafo.getListaVertices().get(4), 36.99)); //Sonsonate - La Libertad
-      grafo.getListaVertices().get(3).agregarArista(
-              new Arista(grafo.getListaVertices().get(3), grafo.getListaVertices().get(1), 67.74)); //Chalatenango - Santa Ana
-      grafo.getListaVertices().get(3).agregarArista(
-              new Arista(grafo.getListaVertices().get(3), grafo.getListaVertices().get(4), 57.91)); //Chalatenango - La Libertad
-      grafo.getListaVertices().get(3).agregarArista(
-              new Arista(grafo.getListaVertices().get(3), grafo.getListaVertices().get(5), 47.07)); //Chalatenango - San Salvador
-      grafo.getListaVertices().get(3).agregarArista(
-              new Arista(grafo.getListaVertices().get(3), grafo.getListaVertices().get(6), 23.96)); //Chalatenango - Cuscatlán
-      grafo.getListaVertices().get(3).agregarArista(
-              new Arista(grafo.getListaVertices().get(3), grafo.getListaVertices().get(7), 27.12)); //Chalatenango - Cabañas
-      grafo.getListaVertices().get(4).agregarArista(
-              new Arista(grafo.getListaVertices().get(4), grafo.getListaVertices().get(1), 33.17)); //La Libertad - Santa Ana
-      grafo.getListaVertices().get(4).agregarArista(
-              new Arista(grafo.getListaVertices().get(4), grafo.getListaVertices().get(2), 36.99)); //La Libertad - Sonsonate
-      grafo.getListaVertices().get(4).agregarArista(
-              new Arista(grafo.getListaVertices().get(4), grafo.getListaVertices().get(3), 57.91)); //La Libertad - Chalatenango
-      grafo.getListaVertices().get(4).agregarArista(
-              new Arista(grafo.getListaVertices().get(4), grafo.getListaVertices().get(5), 22.24)); //La Libertad - San Salvador
-      grafo.getListaVertices().get(4).agregarArista(
-              new Arista(grafo.getListaVertices().get(4), grafo.getListaVertices().get(8), 53.51)); //La Libertad - La Paz
-      grafo.getListaVertices().get(5).agregarArista(
-              new Arista(grafo.getListaVertices().get(5), grafo.getListaVertices().get(3), 47.07)); //San Salvador - Chalatenango
-      grafo.getListaVertices().get(5).agregarArista(
-              new Arista(grafo.getListaVertices().get(5), grafo.getListaVertices().get(4), 22.24)); //San Salvador - La Libertad
-      grafo.getListaVertices().get(5).agregarArista(
-              new Arista(grafo.getListaVertices().get(5), grafo.getListaVertices().get(6), 23.11)); //San Salvador - Cuscatlán
-      grafo.getListaVertices().get(5).agregarArista(
-              new Arista(grafo.getListaVertices().get(5), grafo.getListaVertices().get(8), 33.16)); //San Salvador - La Paz
-      grafo.getListaVertices().get(6).agregarArista(
-              new Arista(grafo.getListaVertices().get(6), grafo.getListaVertices().get(3), 23.96)); //Cuscatlán - Chalatenango
-      grafo.getListaVertices().get(6).agregarArista(
-              new Arista(grafo.getListaVertices().get(6), grafo.getListaVertices().get(5), 23.11)); //Cuscatlán - San Salvador
-      grafo.getListaVertices().get(6).agregarArista(
-              new Arista(grafo.getListaVertices().get(6), grafo.getListaVertices().get(7), 33.62)); //Cuscatlán - Cabañas
-      grafo.getListaVertices().get(6).agregarArista(
-              new Arista(grafo.getListaVertices().get(6), grafo.getListaVertices().get(8), 44.25)); //Cuscatlán - La Paz
-      grafo.getListaVertices().get(6).agregarArista(
-              new Arista(grafo.getListaVertices().get(6), grafo.getListaVertices().get(9), 37.64)); //Cuscatlán - San Vicente
-      grafo.getListaVertices().get(7).agregarArista(
-              new Arista(grafo.getListaVertices().get(7), grafo.getListaVertices().get(3), 27.12)); //Cabañas - Chalatenango
-      grafo.getListaVertices().get(7).agregarArista(
-              new Arista(grafo.getListaVertices().get(7), grafo.getListaVertices().get(6), 33.62)); //Cabañas - Cuscatlán
-      grafo.getListaVertices().get(7).agregarArista(
-              new Arista(grafo.getListaVertices().get(7), grafo.getListaVertices().get(9), 26.51)); //Cabañas - San Vicente
-      grafo.getListaVertices().get(7).agregarArista(
-              new Arista(grafo.getListaVertices().get(7), grafo.getListaVertices().get(11), 74.62)); //Cabañas - San Miguel
-      grafo.getListaVertices().get(8).agregarArista(
-              new Arista(grafo.getListaVertices().get(8), grafo.getListaVertices().get(4), 53.51)); //La Paz - La Libertad
-      grafo.getListaVertices().get(8).agregarArista(
-              new Arista(grafo.getListaVertices().get(8), grafo.getListaVertices().get(5), 33.16)); //La Paz - San Salvador
-      grafo.getListaVertices().get(8).agregarArista(
-              new Arista(grafo.getListaVertices().get(8), grafo.getListaVertices().get(6), 44.25)); //La Paz - Cuscatlán
-      grafo.getListaVertices().get(8).agregarArista(
-              new Arista(grafo.getListaVertices().get(8), grafo.getListaVertices().get(9), 27.14)); //La Paz - San Vicente
-      grafo.getListaVertices().get(9).agregarArista(
-              new Arista(grafo.getListaVertices().get(9), grafo.getListaVertices().get(6), 37.64)); //San Vicente - Cuscatlán
-      grafo.getListaVertices().get(9).agregarArista(
-              new Arista(grafo.getListaVertices().get(9), grafo.getListaVertices().get(7), 26.51)); //San Vicente - Cabañas
-      grafo.getListaVertices().get(9).agregarArista(
-              new Arista(grafo.getListaVertices().get(9), grafo.getListaVertices().get(8), 27.14)); //San Vicente - La Paz
-      grafo.getListaVertices().get(9).agregarArista(
-              new Arista(grafo.getListaVertices().get(9), grafo.getListaVertices().get(10), 49.26)); //San Vicente - Usulután
-      grafo.getListaVertices().get(9).agregarArista(
-              new Arista(grafo.getListaVertices().get(9), grafo.getListaVertices().get(11), 68.74)); //San Vicente - San Miguel
-      grafo.getListaVertices().get(10).agregarArista(
-              new Arista(grafo.getListaVertices().get(10), grafo.getListaVertices().get(9), 49.26)); //Usulután - San Vicente
-      grafo.getListaVertices().get(10).agregarArista(
-              new Arista(grafo.getListaVertices().get(10), grafo.getListaVertices().get(11), 32.44)); //Usulután - San Miguel
-      grafo.getListaVertices().get(11).agregarArista(
-              new Arista(grafo.getListaVertices().get(11), grafo.getListaVertices().get(7), 74.62)); //San Miguel - Cabañas
-      grafo.getListaVertices().get(11).agregarArista(
-              new Arista(grafo.getListaVertices().get(11), grafo.getListaVertices().get(9), 68.74)); //San Miguel - San Vicente
-      grafo.getListaVertices().get(11).agregarArista(
-              new Arista(grafo.getListaVertices().get(11), grafo.getListaVertices().get(10), 32.44)); //San Miguel - Usulutan
-      grafo.getListaVertices().get(11).agregarArista(
-              new Arista(grafo.getListaVertices().get(11), grafo.getListaVertices().get(12), 33.56)); //San Miguel - Morazán
-      grafo.getListaVertices().get(11).agregarArista(
-              new Arista(grafo.getListaVertices().get(11), grafo.getListaVertices().get(13), 31.53)); //San Miguel - La Unión
-      grafo.getListaVertices().get(12).agregarArista(
-              new Arista(grafo.getListaVertices().get(12), grafo.getListaVertices().get(11), 33.56)); //Morazán - San Miguel
-      grafo.getListaVertices().get(12).agregarArista(
-              new Arista(grafo.getListaVertices().get(12), grafo.getListaVertices().get(13), 32.53)); //Morazán - La Unión
-      grafo.getListaVertices().get(13).agregarArista(
-              new Arista(grafo.getListaVertices().get(13), grafo.getListaVertices().get(11), 31.53)); //La Unión - San Miguel
-      grafo.getListaVertices().get(13).agregarArista(
-              new Arista(grafo.getListaVertices().get(13), grafo.getListaVertices().get(12), 32.53)); //La Unión - Morazán
    }
    
    private void agregarItems()
@@ -432,22 +304,37 @@ public class FramePrincipal extends javax.swing.JFrame {
       // TODO add your handling code here:
       if (jcbDepartamentoOrigen.getSelectedIndex() != -1 && jcbDepartamentoDestino.getSelectedIndex() != -1)
       {
-         Grafo Ruta = AlgoritmoDijkstra2.obtenerRuta(grafo, verticeInicio, verticeFinal);
+         Grafo Ruta = AlgoritmoDijkstra.obtenerRuta(grafo, verticeInicio, verticeFinal);
+         List<Vertice> vertices = Ruta.getListaVertices();
          double DistanciaTotal = 0;
+         Vertice lastVertice = null;
          
-         for (Vertice v : Ruta.getListaVertices())
+         //Algoritmo que calcula la distancia total de los segmentos del grafo.
+         for (int i = 0; i < vertices.size(); i++)
          {
-            for (Arista A : v.getAristas())
-            {
-               DistanciaTotal += A.getPeso();
-            }
+             if (lastVertice == null){
+                 lastVertice = vertices.get(i);
+             }
+             else {
+                 List<Arista> aristas = vertices.get(i).getAristas();
+                 for (Arista arista : aristas){
+                          
+                    int id = vertices.get(i).getId();
+                    int expectedId = lastVertice.getId();
+                    int actualId = arista.getSegundoVertice(id);
+                    if(actualId == expectedId){
+                        DistanciaTotal += arista.getPeso();
+                    }
+                 }
+                 lastVertice = vertices.get(i);
+             }
          }
          
          DibujarRutas.dibujarRutas(jpMapa.getGraphics(), grafo);
          DibujarRutas.dibujarRutaMinima(jpMapa.getGraphics(), Ruta);
          
-         //Aqui se hace el reporte de los tiempos y distancias minimas.
-         jtResultados.setText("Distancia Minima: " + String.format("%.2f", DistanciaTotal) + " Km");
+         //TODO: hacer un reporte mas completo.
+         jtResultados.setText("Distancia Minima: " + String.format("%.2f", DistanciaTotal) + " Km\n");
       }
       else
       {

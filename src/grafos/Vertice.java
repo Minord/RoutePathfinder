@@ -17,35 +17,16 @@ public class Vertice {
    private String dato;
    private String type;
    private List<Arista> aristasAdyacentes;
-   private boolean evaluado = false;
    private float x;
    private float y;
-
-   public Vertice(String dato, int x, int y)
-   {
-      this.aristasAdyacentes = new ArrayList<>();
-      this.dato = dato;
-      this.x = x;
-      this.y = y;
-   }
-
-    public Vertice(int id, String name, String type, float x, float y) {
+   
+   public Vertice(int id, String name, String type, float x, float y) {
         this.aristasAdyacentes = new ArrayList<>();
         this.id = id;
         this.dato = name;
         this.type = type;
         this.x = x;
         this.y = y;
-    }
-
-   public void setEvaluado(boolean evaluado)
-   {
-      this.evaluado = evaluado;
-   }
-   
-   public boolean getEvaluado()
-   {
-      return evaluado;
    }
    
    public void agregarArista(Arista a)
@@ -69,24 +50,7 @@ public class Vertice {
    public String getType() {
        return type;
    }
-   
-   public int[] getVerticesAdjacentes(){
-       int[] vertices = new int[aristasAdyacentes.size()];
-       for (int i = 0; i < aristasAdyacentes.size(); i++){
-           Arista arista = aristasAdyacentes.get(i);
-           if (arista.getDestino().getId() != this.id){
-               vertices[i] = arista.getDestino().getId();
-           }
-           else if(arista.getOrigen().getId() != this.id){
-               vertices[i] = arista.getOrigen().getId();
-           }
-           else{
-              vertices[i] = -1;
-           }
-       }
-       return vertices;
-   }
-   
+
    //Estos getter son para retornar coordenadas en pixeles en pantalla
    public int getX()
    {

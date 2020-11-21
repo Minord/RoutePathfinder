@@ -9,11 +9,16 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.List;
 
 /**
  *
  * @author criss
+ * 
+ * Sistema que renderiza el grafo.
+ * 
+ * - Dibuja las calles, ciudades y pueblos de formas diferentes.
+ * - Sistema de seleccion de nodos de origen y destino.
+ * - Dibuja la ruta que es encontrada por el algoritmo.
  */
 public class DibujarRutas {
 
